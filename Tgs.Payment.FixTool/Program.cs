@@ -91,6 +91,8 @@ var app = builder.Build();
 
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.yaml", "PaymentFixTool v1"));
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
 app.MapControllers();
 app.MapHealthChecks("/healthz");
 app.MapSwagger();
