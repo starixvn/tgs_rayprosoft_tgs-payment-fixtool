@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Npgsql;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Instrumentation.AspNetCore;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
@@ -70,7 +71,12 @@ builder.Services
 				&& !httpContext.Request.Path.StartsWithSegments("/profiler/")
 				&& !httpContext.Request.Path.StartsWithSegments("/metrics")
 				&& !new[] { "html", "ico", "png", "jpg" }.Any(
-					ext => httpContext.Request.Path.Value.EndsWith($".{ext}")));
+					ext => httpContext.Request.Path.Value.EndsWith($".{ext}")))
+	.AddOpenTelemetryMetrics(meterBuilder => meterBuilder
+		.AddAspNetCoreInstrumentation()
+		.AddHttpClientInstrumentation()
+		.AddRuntimeMetrics()
+		.AddPrometheusExporter());
 
 builder.Services
 	.AddPaymentServiceClient(
@@ -89,6 +95,7 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.yaml", "PaymentFixTool v1"));
 
 app.UseDefaultFiles();
@@ -99,4 +106,3 @@ app.MapSwagger();
 app.MapProfileViewer();
 
 app.Run();
-

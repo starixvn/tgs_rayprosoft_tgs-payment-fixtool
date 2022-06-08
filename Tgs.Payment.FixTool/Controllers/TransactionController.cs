@@ -15,7 +15,7 @@ namespace Tgs.Payment.FixTool.Controllers;
 public class TransactionController : ControllerBase
 {
 	/// <summary>
-	/// Lists the transactions asynchronous.
+	/// 列出錢包的帳變資料
 	/// </summary>
 	/// <param name="queryService">The query service.</param>
 	/// <param name="walletId">The wallet identifier.</param>
