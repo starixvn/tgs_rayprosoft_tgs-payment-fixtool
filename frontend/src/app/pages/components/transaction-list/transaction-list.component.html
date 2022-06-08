@@ -1,0 +1,41 @@
+<table mat-table [dataSource]="transactions" class="mat-elevation-z8 transaction-table">
+  <ng-container matColumnDef="recorded">
+    <th mat-header-cell *matHeaderCellDef> Recorded On </th>
+    <td mat-cell *matCellDef="let element"> {{element.recordedOn | date:'yyyy-MM-dd HH:mm:ss'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amount">
+    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <td mat-cell *matCellDef="let element"> {{element.amount | number:'1.3-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lock-amount">
+    <th mat-header-cell *matHeaderCellDef> LockAmount </th>
+    <td mat-cell *matCellDef="let element"> {{element.lockAmount | number:'1.3-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="balance">
+    <th mat-header-cell *matHeaderCellDef> Balance </th>
+    <td mat-cell *matCellDef="let element"> {{element.balance | number:'1.3-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="locked-balance">
+    <th mat-header-cell *matHeaderCellDef> LockedBalance </th>
+    <td mat-cell *matCellDef="let element"> {{element.lockedBalance | number:'1.3-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="empty">
+    <th mat-header-cell *matHeaderCellDef> </th>
+    <td mat-cell *matCellDef="let element">
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+  <tr mat-row (click)="clickRow(row)" [class.app-row-is-selected]="selectedRowIds.has(row.id)"
+    *matRowDef="let row; columns: displayColumns;"></tr>
+</table>

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title>{{wrongWallet?.userName}}</mat-card-title>
+  <mat-card-content>
+    <div>
+      <label>Balance:</label><span>{{wrongWallet?.balance | number:'1.3-3'}}</span>
+      <mat-divider></mat-divider>
+    </div>
+    <div>
+      <label>LockedBalance: </label><span>{{wrongWallet?.lockedBalance | number:'1.3-3'}}</span>
+      <mat-divider></mat-divider>
+    </div>
+    <div>
+      <label>InProgress: </label><span>{{wrongWallet?.inProgressAmount | number:'1.3-3'}}</span>
+      <mat-divider></mat-divider>
+    </div>
+    <div>
+      <label>PreCalculate: </label><span>{{calculateAmount | number:'1.3-3'}}</span>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-card-content>
+</mat-card>

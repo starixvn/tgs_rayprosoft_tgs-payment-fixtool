@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{data.orderNo}}</h1>
+<div mat-dialog-content>
+  <p>Fix this form paid transaction log?</p>
+  <div>
+    <label>Status:</label><span>{{data.status}}</span>
+    <mat-divider></mat-divider>
+  </div>
+  <div>
+    <label>Amount:</label><span>{{data.amount | number:'1.3-3'}}</span>
+    <mat-divider></mat-divider>
+  </div>
+  <div>
+    <label>CreatedOn:</label><span>{{data.createdOn | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    <mat-divider></mat-divider>
+  </div>
+  <div>
+    <label>UpdatedOn:</label><span>{{data.updatedOn | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    <mat-divider></mat-divider>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="clickNo()">Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="data.id" cdkFocusInitial>Ok</button>
+</div>

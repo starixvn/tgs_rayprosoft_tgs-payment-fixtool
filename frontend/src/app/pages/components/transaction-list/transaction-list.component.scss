@@ -1,0 +1,34 @@
+.transaction-table {
+  width: 100%;
+
+  .mat-header-cell {
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.mat-row:hover .mat-cell {
+  background-color:ivory;
+}
+
+.app-row-is-selected {
+  font-weight: bold;
+  background-color: lemonchiffon;
+}
+
+.mat-column-recorded {
+  width: 150px;
+  color: darkorchid;
+}
+
+.mat-column-type {
+  width: 70px;
+  text-align: center;
+}
+
+.mat-column-amount, .mat-column-lock-amount, .mat-column-balance, .mat-column-locked-balance {
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+

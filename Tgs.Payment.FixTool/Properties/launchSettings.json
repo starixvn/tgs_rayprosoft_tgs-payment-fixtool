@@ -1,0 +1,24 @@
+{
+	"iisSettings": {
+		"windowsAuthentication": false,
+		"anonymousAuthentication": true,
+		"iisExpress": {
+			"applicationUrl": "http://localhost:47120",
+			"sslPort": 44370
+		}
+	},
+	"profiles": {
+		"Tgs.Payment.FixTool": {
+			"commandName": "Project",
+			"launchBrowser": true,
+			"launchUrl": "swagger",
+			"environmentVariables": {
+				"ASPNETCORE_ENVIRONMENT": "Development",
+				"OTEL_SERVICE_NAME": "Payment-FixTool(local)",
+				"NODE_IP": "otel.rpgp.cc"
+			},
+			"applicationUrl": "https://localhost:7214;http://localhost:5214",
+			"dotnetRunMessages": true
+		}
+	}
+}

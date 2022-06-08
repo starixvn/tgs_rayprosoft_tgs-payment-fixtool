@@ -1,0 +1,17 @@
+app-wrong-wallet-detail {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.app-grid-container {
+  height: 100%;
+}
+
+.app-split {
+  width: 48%;
+  height: 65vh;
+  margin-right: 30px;
+  display: inline-flex;
+  flex-direction: row;
+  overflow: auto;
+}

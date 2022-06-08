@@ -1,0 +1,56 @@
+@mixin wrong-wallet-cells() {
+  padding-left: 16px;
+  padding-right: 10px;
+  border-right: 1px solid currentColor;
+}
+
+.wrong-wallets-table {
+  width: 100%;
+
+  .mat-header-cell {
+    @include wrong-wallet-cells();
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+  }
+
+  .mat-cell {
+    @include wrong-wallet-cells();
+  }
+}
+
+.mat-column-username.mat-cell {
+  width: 100px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid blueviolet;
+  padding-right: 24px;
+  text-align: left;
+}
+
+.mat-column-balance.mat-cell {
+  width: 150px;
+  text-align: right;
+  border-bottom: 1px solid blueviolet;
+}
+
+.mat-column-locked-balance.mat-cell {
+  width: 150px;
+  text-align: right;
+  border-bottom: 1px solid blueviolet;
+}
+
+.mat-column-in-progress.mat-cell {
+  width: 150px;
+  text-align: right;
+  border-bottom: 1px solid blueviolet;
+}
+
+.mat-column-commands.mat-cell {
+  padding-left: 20px;
+  border-bottom: 1px solid blueviolet;
+
+  button {
+    margin-right: 10px;
+  }
+}

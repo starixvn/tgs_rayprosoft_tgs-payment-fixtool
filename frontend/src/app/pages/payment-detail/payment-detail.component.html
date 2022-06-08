@@ -1,0 +1,11 @@
+<div style="margin-bottom: 10px"><button mat-raised-button [routerLink]="['']">Previous</button></div>
+<app-wrong-wallet-detail [wrongWallet]="wrongWallet" [calculateAmount]="preCalculateAmount"></app-wrong-wallet-detail>
+<div class="app-grid-container" *ngIf="wrongWallet != null">
+  <div class="app-split">
+    <app-withdraw-list [withdrawForms]="withdrawForms" [walletId]="wrongWallet!.id" [selectedRowIds]="withdrawSelectedRowIds" (afterFix)="refresh()" [(preCalculateAmount)]="preCalculateAmount"></app-withdraw-list>
+  </div>
+  <div class="app-split">
+    <app-transaction-list [transactions]="transactions" [selectedRowIds]="transactionSelectedRowIds"></app-transaction-list>
+  </div>
+  <div class="clearfix"></div>
+</div>

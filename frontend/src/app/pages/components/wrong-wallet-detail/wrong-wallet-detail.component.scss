@@ -1,0 +1,23 @@
+.mat-card-content {
+  div {
+    padding-left: 10px;
+    label {
+      width: 150px;
+      display: inline-block;
+      text-align: right;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    span {
+      width: 70px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    .mat-divider {
+      width: 40%;
+      margin-left: 30px;
+    }
+  }
+}

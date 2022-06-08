@@ -1,0 +1,46 @@
+.withdraw-table {
+  width: 100%;
+
+  .mat-header-cell {
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+.mat-row:hover .mat-cell {
+  background-color:ivory;
+}
+
+.app-row-is-selected {
+  font-weight: bold;
+  background-color: lemonchiffon;
+}
+
+.mat-column-order-no {
+  width: 150px;
+}
+
+.mat-column-status {
+  width: 70px;
+  text-align: center;
+}
+
+.mat-column-amount {
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.mat-column-created {
+  width: 150px;
+  color: coral;
+}
+
+.mat-column-updated {
+  width: 150px;
+  color: darkorchid;
+}
+
+.mat-column-commands {
+  padding-left: 5px;
+}
