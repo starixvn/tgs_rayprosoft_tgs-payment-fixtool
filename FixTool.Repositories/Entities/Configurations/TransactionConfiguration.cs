@@ -60,6 +60,11 @@ namespace Tgs.Payment.FixTools.Repositories.Entities.Configurations
 
             entity.Property(e => e.WalletId).HasColumnName("wallet_id");
 
+            entity.HasOne(d => d.Brand)
+                .WithMany(p => p.Transactions)
+                .HasForeignKey(d => d.BrandId)
+                .HasConstraintName("fk_transactions_brands_brand_id");
+
             entity.HasOne(d => d.Wallet)
                 .WithMany(p => p.Transactions)
                 .HasForeignKey(d => d.WalletId)

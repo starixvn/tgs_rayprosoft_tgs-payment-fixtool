@@ -18,6 +18,10 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "dbo.brands",
+         "ObjectType": 0
+      },
+      {
          "Name": "dbo.transactions",
          "ObjectType": 0
       },
