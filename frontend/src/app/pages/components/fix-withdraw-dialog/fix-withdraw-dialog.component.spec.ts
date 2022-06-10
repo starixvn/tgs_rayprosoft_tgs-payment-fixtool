@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FixPaidDialogComponent } from './fix-paid-dialog.component';
+import { FixWithdrawDialogComponent } from './fix-withdraw-dialog.component';
 
 describe('FixPaidDialogComponent', () => {
-  let component: FixPaidDialogComponent;
-  let fixture: ComponentFixture<FixPaidDialogComponent>;
+  let component: FixWithdrawDialogComponent;
+  let fixture: ComponentFixture<FixWithdrawDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FixPaidDialogComponent ]
+      declarations: [ FixWithdrawDialogComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FixPaidDialogComponent);
+    fixture = TestBed.createComponent(FixWithdrawDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -65,4 +65,35 @@ public class PaymentTests
 				Arg.Is(command.WithdrawFormId.ToString()),
 				Arg.Any<Guid?>());
 	}
+
+	[TestMethod]
+	public async Task Fix_Reject_WithdrawForm()
+	{
+		var fakePaymentServiceClient = Substitute.For<IPaymentServiceClient>();
+		var fakeCashServiceClient = Substitute.For<ICashServiceClient>();
+
+		var sut = new FixWithdrawRejectCommandService(fakePaymentServiceClient, fakeCashServiceClient);
+
+		var command = new FixWithdrawRejectCommand(Guid.NewGuid(), Guid.NewGuid());
+
+		_ = fakePaymentServiceClient.GetWithdrawFormAsync(Arg.Is(command.WithdrawFormId))
+			.Returns(new WithdrawFormInfo
+			{
+				Id = command.WithdrawFormId,
+				ActualAmount = 10M,
+				Amount = 100M,
+				Status = PaymentFlowState.Reject
+			});
+
+		await sut.ExecuteAsync(command);
+
+		_ = fakeCashServiceClient.Received(1)
+			.AdjustSystemAsync(
+				Arg.Is(command.WalletId),
+				Arg.Is(0M),
+				Arg.Is(-100M),
+				Arg.Any<string>(),
+				Arg.Is(command.WithdrawFormId.ToString()),
+				Arg.Is(Guid.Empty));
+	}
 }

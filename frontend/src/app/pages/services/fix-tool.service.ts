@@ -31,4 +31,8 @@ export class FixToolService {
   fixWithdrawPaid(withdrawFormId: string, walletId: string): Observable<void> {
     return this.http.post<void>(`/api/withdraw/paid/${withdrawFormId}/${walletId}`, null);
   }
+
+  fixWithdrawReject(withdrawFormId: string, walletId: string): Observable<void> {
+    return this.http.post<void>(`/api/withdraw/reject/${withdrawFormId}/${walletId}`, null);
+  }
 }

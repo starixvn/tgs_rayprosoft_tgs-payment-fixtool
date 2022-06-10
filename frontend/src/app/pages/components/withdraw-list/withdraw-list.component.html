@@ -29,7 +29,8 @@
     <td mat-cell *matCellDef="let element">
       <button mat-raised-button color="primary" *ngIf="element.status == 'Paid'"
         (click)="clickFixPaid(element);$event.stopPropagation()">FixPaid</button>
-      <button mat-raised-button color="primary" *ngIf="element.status == 'Reject'">FixReject</button>
+      <button mat-raised-button color="primary" *ngIf="element.status == 'Reject'"
+        (click)="clickFixReject(element);$event.stopPropagation()">FixReject</button>
     </td>
   </ng-container>
 
