@@ -28,6 +28,14 @@
   text-align: left;
 }
 
+.mat-column-brand.mat-cell {
+  width: 80px;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid blueviolet;
+  padding-right: 24px;
+  text-align: center;
+}
+
 .mat-column-balance.mat-cell {
   width: 150px;
   text-align: right;

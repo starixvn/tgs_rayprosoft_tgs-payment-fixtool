@@ -8,11 +8,13 @@ import { PaymentDetailComponent } from './payment-detail/payment-detail.componen
 import { ComponentsModule } from './components/components.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AppRoutingModule } from '../app-routing.module';
+import { BrandCodePipe } from './brand-code.pipe';
 
 @NgModule({
   declarations: [
     WrongWalletsComponent,
-    PaymentDetailComponent
+    PaymentDetailComponent,
+    BrandCodePipe
   ],
   imports: [
     CommonModule,
