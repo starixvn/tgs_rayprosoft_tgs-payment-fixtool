@@ -15,6 +15,7 @@ namespace Tgs.Payment.FixTools.Repositories.Entities
         {
         }
 
+        public virtual DbSet<Brand> Brands { get; set; } = null!;
         public virtual DbSet<Transaction> Transactions { get; set; } = null!;
         public virtual DbSet<Wallet> Wallets { get; set; } = null!;
         public virtual DbSet<WithdrawForm> WithdrawForms { get; set; } = null!;
@@ -24,6 +25,7 @@ namespace Tgs.Payment.FixTools.Repositories.Entities
             modelBuilder.HasPostgresExtension("ltree")
                 .HasPostgresExtension("pg_trgm");
 
+            modelBuilder.ApplyConfiguration(new Configurations.BrandConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.TransactionConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.WalletConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.WithdrawFormConfiguration());

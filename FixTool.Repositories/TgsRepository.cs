@@ -13,8 +13,7 @@ internal class TgsRepository : ITgsRepository
 	}
 
 	public IAsyncEnumerable<WrongWallet> ListWrongWalletsAsync(CancellationToken cancellationToken = default)
-	{
-		return m_TgsContext.Set<WrongWallet>()
+		=> m_TgsContext.Set<WrongWallet>()
 			.FromSqlInterpolated($@"
 				SELECT
 					W.id AS ""Id"",
@@ -60,11 +59,9 @@ internal class TgsRepository : ITgsRepository
 					WF.user_id IS NULL")
 			.ToArray()
 			.ToAsyncEnumerable();
-	}
 
 	public async ValueTask<WrongWallet?> GetWrongWalletAsync(Guid walletId, CancellationToken cancellationToken = default)
-	{
-		return await m_TgsContext.Set<WrongWallet>()
+		=> await m_TgsContext.Set<WrongWallet>()
 			.FromSqlInterpolated($@"
 				SELECT
 					W.id AS ""Id"",
@@ -110,11 +107,9 @@ internal class TgsRepository : ITgsRepository
 					WF.user_id IS NULL")
 			.FirstOrDefaultAsync(cancellationToken: cancellationToken)
 			.ConfigureAwait(false);
-	}
 
 	public IAsyncEnumerable<WalletTransaction> ListTransactionsAsync(Guid walletId, CancellationToken cancellationToken = default)
-	{
-		return m_TgsContext.Transactions
+		=> m_TgsContext.Transactions
 			.Where(trx => trx.WalletId == walletId)
 			.OrderByDescending(trx => trx.RecordedOn)
 			.Select(trx => new WalletTransaction(
@@ -128,5 +123,10 @@ internal class TgsRepository : ITgsRepository
 				trx.RecordedOn))
 			.ToArray()
 			.ToAsyncEnumerable();
-	}
+
+	public IAsyncEnumerable<BrandInfo> ListBrandInfoAsync(CancellationToken cancellationToken = default)
+		=> m_TgsContext.Brands
+			.Select(brand => new BrandInfo(brand.Id, brand.Code))
+			.ToArray()
+			.ToAsyncEnumerable();
 }

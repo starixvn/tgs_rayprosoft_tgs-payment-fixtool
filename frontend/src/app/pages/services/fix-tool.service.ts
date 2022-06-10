@@ -1,3 +1,4 @@
+import { BrandMap } from './brand-map';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WrongWallet } from './wrong-wallet';
@@ -34,5 +35,9 @@ export class FixToolService {
 
   fixWithdrawReject(withdrawFormId: string, walletId: string): Observable<void> {
     return this.http.post<void>(`/api/withdraw/reject/${withdrawFormId}/${walletId}`, null);
+  }
+
+  listBrandMaps(): Observable<BrandMap> {
+    return this.http.get<BrandMap>('/api/brand');
   }
 }

@@ -31,5 +31,7 @@ namespace Tgs.Payment.FixTools.Repositories.Entities
         public string? PaidUserId { get; set; }
         public string? PaidUserName { get; set; }
         public string? OrderNo { get; set; }
+
+        public virtual Brand Brand { get; set; } = null!;
     }
 }

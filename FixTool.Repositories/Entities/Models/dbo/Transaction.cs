@@ -22,6 +22,7 @@ namespace Tgs.Payment.FixTools.Repositories.Entities
         public decimal LockedBalance { get; set; }
         public decimal LockAmount { get; set; }
 
+        public virtual Brand Brand { get; set; } = null!;
         public virtual Wallet Wallet { get; set; } = null!;
     }
 }

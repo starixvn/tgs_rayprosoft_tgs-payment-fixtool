@@ -86,6 +86,11 @@ namespace Tgs.Payment.FixTools.Repositories.Entities.Configurations
 
             entity.Property(e => e.UserType).HasColumnName("user_type");
 
+            entity.HasOne(d => d.Brand)
+                .WithMany(p => p.WithdrawForms)
+                .HasForeignKey(d => d.BrandId)
+                .HasConstraintName("fk_withdraw_forms_brands_brand_id");
+
             OnConfigurePartial(entity);
         }
 
