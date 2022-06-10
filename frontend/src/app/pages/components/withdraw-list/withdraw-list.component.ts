@@ -1,7 +1,7 @@
+import { WithdrawForm } from './../../services/withdraw-form';
 import { FixToolService } from './../../services/fix-tool.service';
-import { FixPaidDialogComponent } from './../fix-paid-dialog/fix-paid-dialog.component';
+import { FixWithdrawDialogComponent } from '../fix-withdraw-dialog/fix-withdraw-dialog.component';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { WithdrawForm } from '../../services/withdraw-form';
 import { MatDialog } from '@angular/material/dialog';
 import { lastValueFrom } from 'rxjs';
 
@@ -41,13 +41,25 @@ export class WithdrawListComponent implements OnInit {
   }
 
   public clickFixPaid(form: WithdrawForm): void {
-    const dialogRef = this.dialog.open(FixPaidDialogComponent, {
+    const dialogRef = this.dialog.open(FixWithdrawDialogComponent, {
       width: '500px',
       data: form,
     });
 
     dialogRef.afterClosed().subscribe(async result => {
       await lastValueFrom(this.fixTool.fixWithdrawPaid(result, this.walletId));
+      this.afterFix.emit();
+    });
+  }
+
+  public clickFixReject(form: WithdrawForm): void {
+    const dialogRef = this.dialog.open(FixWithdrawDialogComponent, {
+      width: '500px',
+      data: form,
+    });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      await lastValueFrom(this.fixTool.fixWithdrawReject(result, this.walletId));
       this.afterFix.emit();
     });
   }

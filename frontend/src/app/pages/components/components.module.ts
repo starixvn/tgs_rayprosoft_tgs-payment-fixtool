@@ -7,7 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { WithdrawListComponent } from './withdraw-list/withdraw-list.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FixPaidDialogComponent } from './fix-paid-dialog/fix-paid-dialog.component';
+import { FixWithdrawDialogComponent } from './fix-withdraw-dialog/fix-withdraw-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 
 
@@ -16,7 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     WrongWalletDetailComponent,
     WithdrawListComponent,
     TransactionListComponent,
-    FixPaidDialogComponent
+    FixWithdrawDialogComponent
   ],
   imports: [
     CommonModule,
