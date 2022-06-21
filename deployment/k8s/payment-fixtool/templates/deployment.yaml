@@ -37,11 +37,13 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: OTEL_SERVICE_NAME
-              value: Payment-MalakiPay({{ .Release.Namespace }})
+              value: Payment-FixTool({{ .Release.Namespace }})
             - name: NODE_IP
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+            - name: DOTNET_gcServer
+              value: "0"
             - name: ConnectionStrings__Tgs
               valueFrom:
                 secretKeyRef:
