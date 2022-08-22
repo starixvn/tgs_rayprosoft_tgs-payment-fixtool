@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute;
 using Tgs.CashService.Client;
 using Tgs.Payment.Clients;
 using Tgs.Payment.FixTools.ApplicationServices;
@@ -95,5 +96,11 @@ public class PaymentTests
 				Arg.Any<string>(),
 				Arg.Is(command.WithdrawFormId.ToString()),
 				Arg.Is(Guid.Empty));
+	}
+
+	[TestMethod]
+	public void Fix_Init_WithdrawForm()
+	{
+		var sut = new FixWithdrawInitCommandService();
 	}
 }
