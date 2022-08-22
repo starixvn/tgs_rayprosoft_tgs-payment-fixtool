@@ -88,7 +88,7 @@ public class PaymentTests
 		await sut.ExecuteAsync(command);
 
 		_ = fakeCashServiceClient.Received(1)
-			.AdjustSystemAsync(
+			.AdjustSystemV2Async(
 				Arg.Is(command.WalletId),
 				Arg.Is(0M),
 				Arg.Is(-100M),
