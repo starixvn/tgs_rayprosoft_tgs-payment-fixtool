@@ -80,22 +80,4 @@ public class WithdrawController : ControllerBase
 
 		return fixService.ExecuteAsync(command);
 	}
-
-	/// <summary>
-	/// 修復申請失敗帳變
-	/// </summary>
-	/// <param name="fixService">The fix service.</param>
-	/// <param name="formId">The form identifier.</param>
-	/// <param name="walletId">The wallet identifier.</param>
-	/// <returns></returns>
-	[HttpPost("init/{formId}/{walletId}", Name = "FixInit")]
-	public ValueTask FixInitAsync(
-		[FromServices] ICommandService<FixWithdrawInitCommand> fixService,
-		Guid formId,
-		Guid walletId)
-	{
-		var command = new FixWithdrawInitCommand(formId, walletId);
-
-		return fixService.ExecuteAsync(command, HttpContext.RequestAborted);
-	}
 }

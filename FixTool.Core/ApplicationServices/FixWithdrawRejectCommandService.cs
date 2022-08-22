@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tgs.CashService.Client;
+﻿using Tgs.CashService.Client;
 using Tgs.Payment.Clients;
 using Tgs.ServiceUtility;
 
 namespace Tgs.Payment.FixTools.ApplicationServices;
+
 internal class FixWithdrawRejectCommandService : ICommandService<FixWithdrawRejectCommand>
 {
 	private readonly IPaymentServiceClient m_PaymentServiceClient;
@@ -18,6 +14,7 @@ internal class FixWithdrawRejectCommandService : ICommandService<FixWithdrawReje
 		m_PaymentServiceClient = paymentServiceClient ?? throw new ArgumentNullException(nameof(paymentServiceClient));
 		m_CashServiceClient = cashServiceClient ?? throw new ArgumentNullException(nameof(cashServiceClient));
 	}
+
 	public async ValueTask ExecuteAsync(FixWithdrawRejectCommand command, CancellationToken cancellationToken = default)
 	{
 		var form = await m_PaymentServiceClient
@@ -27,7 +24,7 @@ internal class FixWithdrawRejectCommandService : ICommandService<FixWithdrawReje
 		if (form is null || form.Status != PaymentFlowState.Reject)
 			return;
 
-		_ = await m_CashServiceClient.AdjustSystemAsync(
+		_ = await m_CashServiceClient.AdjustSystemV2Async(
 			command.WalletId,
 			0M,
 			-form.Amount,
