@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Npgsql;
@@ -18,8 +18,8 @@ builder.Logging
 		_ = options.AddFluentdForwardExporter(fluentOptions =>
 		{
 			var nodeIp = builder.Configuration.GetValue<string>("NODE_IP");
-			fluentOptions.Host = nodeIp;
-			fluentOptions.Tag = builder.Configuration.GetValue<string>("OTEL_SERVICE_NAME");
+			fluentOptions.Host = nodeIp!;
+			fluentOptions.Tag = builder.Configuration.GetValue<string>("OTEL_SERVICE_NAME")!;
 			fluentOptions.UseMessagePack();
 		});
 	});
@@ -79,16 +79,13 @@ builder.Services
 		.AddPrometheusExporter());
 
 builder.Services
-	.AddPaymentServiceClient(
-		(options, _) =>
-			options.PaymentServiceBaseUrl = builder.Configuration.GetValue<Uri>("FixTool:PaymentServiceBaseUrl"))
-	.AddCashServiceClient(
-		(options, _) =>
-			options.BaseUrl = builder.Configuration.GetValue<Uri>("FixTool:CashServiceBaseUrl"))
+	.AddPaymentServiceClient((clientBuilder) => clientBuilder
+		.ConfigureHttpClient(http => http.BaseAddress = builder.Configuration.GetValue<Uri>("FixTool:PaymentServiceBaseUrl")))
+	.AddCashServiceClient((options, _) =>
+		options.BaseUrl = builder.Configuration.GetValue<Uri>("FixTool:CashServiceBaseUrl")!)
 	.AddPaymentFixTool()
-	.AddPaymentFixToolRepositories(
-		(_, optionsBuilder) => optionsBuilder
-			.UseNpgsql(builder.Configuration.GetConnectionString("Tgs")));
+	.AddPaymentFixToolRepositories((_, optionsBuilder) => optionsBuilder
+		.UseNpgsql("name=Tgs"));
 
 builder.Services
 	.AddHealthChecks();
