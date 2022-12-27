@@ -9,12 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixTool.Core", "FixTool.Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{195ED98B-7DFF-4825-B684-A19360096D9B}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixTool.Core.UnitTests", "FixTool.Core.UnitTests\FixTool.Core.UnitTests.csproj", "{643B79F0-98B0-459D-BEF4-81061CD17609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixTool.Core.UnitTests", "FixTool.Core.UnitTests\FixTool.Core.UnitTests.csproj", "{643B79F0-98B0-459D-BEF4-81061CD17609}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixTool.Repositories", "FixTool.Repositories\FixTool.Repositories.csproj", "{71DC9E77-1D60-4554-A07E-3EF4B2B62CBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixTool.Repositories", "FixTool.Repositories\FixTool.Repositories.csproj", "{71DC9E77-1D60-4554-A07E-3EF4B2B62CBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
