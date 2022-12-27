@@ -19,24 +19,14 @@ stages:
 
 build-code:
   extends: .build-code-template
-  only:
-    - merge_requests
-    - main
 
 unit-test:
   extends: .unit-test-template
-  needs:
-    - build-code
-  only:
-    - merge_requests
-    - main
 
 push-docker-image:
   extends: .push-docker-image-template
   variables:
     project: Tgs.Payment.FixTool/Tgs.Payment.FixTool.csproj
-  only:
-    - main
 
 push-k8s-template:
   stage: publish
