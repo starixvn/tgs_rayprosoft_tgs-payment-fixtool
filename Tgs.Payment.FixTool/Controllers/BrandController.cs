@@ -1,11 +1,11 @@
 ﻿using System.Collections.Immutable;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tgs.Payment.FixTools;
 using Tgs.Payment.FixTools.ApplicationServices;
 using Tgs.ServiceUtility;
 
 namespace Tgs.Payment.FixTool.Controllers;
+
 /// <summary>
 /// Brand
 /// </summary>
@@ -14,7 +14,6 @@ namespace Tgs.Payment.FixTool.Controllers;
 [ApiController]
 public class BrandController : ControllerBase
 {
-
 	/// <summary>
 	/// 列出所有的Brand Code對應
 	/// </summary>
