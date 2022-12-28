@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Tgs.Payment.Clients;
+﻿using Tgs.Payment.Clients;
 using Tgs.ServiceUtility;
 
 namespace Tgs.Payment.FixTools.ApplicationServices;
@@ -13,9 +12,9 @@ internal class PlayerWithdrawFormsQueryService : IQueryService<PlayerWithdrawFor
 		m_PaymentServiceClient = paymentServiceClient ?? throw new ArgumentNullException(nameof(paymentServiceClient));
 	}
 
-	public async IAsyncEnumerable<WithdrawFormInfo> QueryAsync(
+	public IAsyncEnumerable<WithdrawFormInfo> QueryAsync(
 		PlayerWithdrawFormsQuery query,
-		[EnumeratorCancellation] CancellationToken cancellationToken = default)
+		CancellationToken cancellationToken = default)
 	{
 		var queryConditions = new WithdrawFormQueryConditions
 		{
@@ -30,20 +29,21 @@ internal class PlayerWithdrawFormsQueryService : IQueryService<PlayerWithdrawFor
 			IsDesc = true
 		};
 
-		var result = await m_PaymentServiceClient
-			.QueryWithdrawFormsAsync(queryConditions, paging, cancellationToken)
-			.ConfigureAwait(false);
-
-		foreach (var item in result.Items)
-			yield return new WithdrawFormInfo(
-				item.Id,
-				item.OrderNo!,
-				item.BrandId,
-				item.UserId!,
-				item.UserType,
-				item.Status,
-				item.Amount,
-				item.CreatedOn.LocalDateTime,
-				item.UpdatedOn.LocalDateTime);
+		return m_PaymentServiceClient
+			.QueryWithdrawFormsAsync(query.BrandId, query.PlayerCode, UserType.Player, cancellationToken)
+			.ToArrayAsync(cancellationToken: cancellationToken)
+			.AsTask()
+			.ToAsyncEnumerable()
+			.SelectMany(arr => arr.ToAsyncEnumerable()
+				.Select(info => new WithdrawFormInfo(
+					info.Id,
+					info.OrderNo!,
+					info.BrandId,
+					info.UserId!,
+					info.UserType,
+					info.Status,
+					info.Amount,
+					info.CreatedOn.LocalDateTime,
+					info.UpdatedOn.LocalDateTime)));
 	}
 }
