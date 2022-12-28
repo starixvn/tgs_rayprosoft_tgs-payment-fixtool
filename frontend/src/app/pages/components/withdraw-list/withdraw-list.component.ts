@@ -2,7 +2,7 @@ import { WithdrawForm } from './../../services/withdraw-form';
 import { FixToolService } from './../../services/fix-tool.service';
 import { FixWithdrawDialogComponent } from '../fix-withdraw-dialog/fix-withdraw-dialog.component';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { lastValueFrom } from 'rxjs';
 
 @Component({

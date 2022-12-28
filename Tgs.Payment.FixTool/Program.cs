@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentdForward.OpenTelemetry.MessagePack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Npgsql;
@@ -20,7 +21,9 @@ builder.Logging
 			var nodeIp = builder.Configuration.GetValue<string>("NODE_IP");
 			fluentOptions.Host = nodeIp!;
 			fluentOptions.Tag = builder.Configuration.GetValue<string>("OTEL_SERVICE_NAME")!;
-			fluentOptions.UseMessagePack();
+			fluentOptions.UseMessagePack(LogRecordFormatterResolver.GetResolverInstanceWithExtendInfo(
+				"MachineName",
+				() => Environment.MachineName));
 		});
 	});
 
