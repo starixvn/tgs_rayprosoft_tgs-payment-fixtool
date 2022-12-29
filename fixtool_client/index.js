@@ -1,0 +1,12 @@
+"use strict";
+// import FixToolService from './services/fix-tool-service.js';
+// import axiosConfigFactory from './models/axios-configuration.js';
+// let instance = axiosConfigFactory("test-core");
+// let svc = new FixToolService(instance);
+// var result = await svc.listWrongWallets();
+// console.log(result);
+var axiosConfigFactory = require('./models/axios-configuration.js').default;
+var FixToolService = require('./services/fix-tool-service.js').default;
+var instance = axiosConfigFactory("test-core");
+var svc = new FixToolService(instance);
+svc.listWrongWallets().then(function (ret) { return console.log(ret); });

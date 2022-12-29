@@ -1,0 +1,16 @@
+﻿{
+	"version": "1",
+	"environments": [
+		{
+			"name": "WSL Ubuntu",
+			"type": "wsl",
+			"wslDistribution": "Ubuntu-22.04",
+			"localRoot": "phoenix"
+		},
+		{
+			"name": "Docker dotnet/sdk",
+			"type": "docker",
+			"dockerImage": "mcr.microsoft.com/dotnet/sdk"
+		}
+	]
+}

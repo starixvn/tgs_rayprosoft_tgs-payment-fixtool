@@ -1,4 +1,5 @@
 ﻿using FluentdForward.OpenTelemetry.MessagePack;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
@@ -43,43 +44,50 @@ builder.Services
 	});
 
 builder.Services
-	 .AddSingleton<IConfigureOptions<OtlpExporterOptions>>(
-		sp => new ConfigureNamedOptions<OtlpExporterOptions>(
-			Options.DefaultName,
-			exporterOptions =>
-			{
-				var config = sp.GetRequiredService<IConfiguration>();
-				var nodeIp = config.GetValue<string>("NODE_IP");
+	.AddResponseCompression()
+	.AddHttpLogging(loggingOptions =>
+	{
+		loggingOptions.LoggingFields = HttpLoggingFields.All;
+		loggingOptions.MediaTypeOptions.AddText("application/x-www-form-urlencoded");
+		loggingOptions.MediaTypeOptions.AddText("text/html");
+	})
+	.AddSingleton<IConfigureOptions<OtlpExporterOptions>>(
+	sp => new ConfigureNamedOptions<OtlpExporterOptions>(
+		Options.DefaultName,
+		exporterOptions =>
+		{
+			var config = sp.GetRequiredService<IConfiguration>();
+			var nodeIp = config.GetValue<string>("NODE_IP");
 
-				if (!string.IsNullOrWhiteSpace(nodeIp))
-					exporterOptions.Endpoint = new Uri($"http://{nodeIp}:4317");
+			if (!string.IsNullOrWhiteSpace(nodeIp))
+				exporterOptions.Endpoint = new Uri($"http://{nodeIp}:4317");
 
-				config.GetSection("Opentelemetry:Tracing").Bind(exporterOptions);
-			}))
-	.AddOpenTelemetryTracing(traceBuilder => traceBuilder
-		.SetResourceBuilder(ResourceBuilder.CreateDefault().AddEnvironmentVariableDetector())
-		.AddSource("Tgs.*")
-		.AddSource("TGS.*")
-		.AddAspNetCoreInstrumentation()
-		.AddHttpClientInstrumentation()
-		.AddNpgsql()
-		.AddProfileViewExporter()
-		.AddOtlpExporter())
-	.AddProfileViewer()
-	.Configure<AspNetCoreInstrumentationOptions>(
-		options => options.Filter = httpContext
-			=> !httpContext.Request.Path.HasValue
-				|| !httpContext.Request.Path.StartsWithSegments("/swagger")
-				&& !httpContext.Request.Path.StartsWithSegments("/healthz")
-				&& !httpContext.Request.Path.StartsWithSegments("/profiler/")
-				&& !httpContext.Request.Path.StartsWithSegments("/metrics")
-				&& !new[] { "html", "ico", "png", "jpg" }.Any(
-					ext => httpContext.Request.Path.Value.EndsWith($".{ext}")))
-	.AddOpenTelemetryMetrics(meterBuilder => meterBuilder
-		.AddAspNetCoreInstrumentation()
-		.AddHttpClientInstrumentation()
-		.AddRuntimeInstrumentation()
-		.AddPrometheusExporter());
+			config.GetSection("Opentelemetry:Tracing").Bind(exporterOptions);
+		}))
+.AddOpenTelemetryTracing(traceBuilder => traceBuilder
+	.SetResourceBuilder(ResourceBuilder.CreateDefault().AddEnvironmentVariableDetector())
+	.AddSource("Tgs.*")
+	.AddSource("TGS.*")
+	.AddAspNetCoreInstrumentation()
+	.AddHttpClientInstrumentation()
+	.AddNpgsql()
+	.AddProfileViewExporter()
+	.AddOtlpExporter())
+.AddProfileViewer()
+.Configure<AspNetCoreInstrumentationOptions>(
+	options => options.Filter = httpContext
+		=> !httpContext.Request.Path.HasValue
+			|| !httpContext.Request.Path.StartsWithSegments("/swagger")
+			&& !httpContext.Request.Path.StartsWithSegments("/healthz")
+			&& !httpContext.Request.Path.StartsWithSegments("/profiler/")
+			&& !httpContext.Request.Path.StartsWithSegments("/metrics")
+			&& !new[] { "html", "ico", "png", "jpg" }.Any(
+				ext => httpContext.Request.Path.Value.EndsWith($".{ext}")))
+.AddOpenTelemetryMetrics(meterBuilder => meterBuilder
+	.AddAspNetCoreInstrumentation()
+	.AddHttpClientInstrumentation()
+	.AddRuntimeInstrumentation()
+	.AddPrometheusExporter());
 
 builder.Services
 	.AddPaymentServiceClient((clientBuilder) => clientBuilder
@@ -95,6 +103,8 @@ builder.Services
 
 var app = builder.Build();
 
+app.UseResponseCompression();
+app.UseHttpLogging();
 app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.yaml", "PaymentFixTool v1"));
 

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixTool.Core.UnitTests", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FixTool.Repositories", "FixTool.Repositories\FixTool.Repositories.csproj", "{71DC9E77-1D60-4554-A07E-3EF4B2B62CBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixTool.IntegrationTests", "FixTool.IntegrationTests\FixTool.IntegrationTests.csproj", "{C2F3EAF8-EA2B-4D6B-814E-3857DE6C1F75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{71DC9E77-1D60-4554-A07E-3EF4B2B62CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71DC9E77-1D60-4554-A07E-3EF4B2B62CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71DC9E77-1D60-4554-A07E-3EF4B2B62CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2F3EAF8-EA2B-4D6B-814E-3857DE6C1F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2F3EAF8-EA2B-4D6B-814E-3857DE6C1F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2F3EAF8-EA2B-4D6B-814E-3857DE6C1F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2F3EAF8-EA2B-4D6B-814E-3857DE6C1F75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
