@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Tgs.Payment.FixTool/wwwroot/
+
+fixtool_client/**/*.js

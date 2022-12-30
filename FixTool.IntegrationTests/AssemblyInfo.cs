@@ -1,0 +1,1 @@
+﻿[assembly: TestFramework("FixTool.IntegrationTests.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "FixTool.IntegrationTests")]

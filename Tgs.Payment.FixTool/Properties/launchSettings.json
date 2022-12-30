@@ -1,8 +1,8 @@
-{
+﻿{
 	"profiles": {
 		"Tgs.Payment.FixTool": {
 			"commandName": "Project",
-			"launchBrowser": true,
+			//"launchBrowser": true,
 			"launchUrl": "swagger",
 			"environmentVariables": {
 				"ASPNETCORE_ENVIRONMENT": "Development",

@@ -1,4 +1,4 @@
-using NSubstitute;
+﻿using NSubstitute;
 using Tgs.Payment.FixTools;
 using Tgs.Payment.FixTools.ApplicationServices;
 
@@ -27,7 +27,8 @@ public class WrongWalletTests
 	{
 		var fakeTgsRepository = Substitute.For<ITgsRepository>();
 
-		var sut = new GetWrongWalletQueryService(fakeTgsRepository);
+		var sut = new GetWrongWalletQueryService(
+			fakeTgsRepository);
 
 		var query = new GetWrongWalletQuery(Guid.NewGuid());
 
