@@ -4,12 +4,12 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM node:18.3 AS nodejs
+FROM node:18.10 AS nodejs
 WORKDIR /src
 COPY ["frontend", "frontend/"]
 WORKDIR /src/frontend
 RUN npm ci
-RUN npx ng build --prod
+RUN npx ng build -c production --aot
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BuildConfiguration=Release
