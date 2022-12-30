@@ -20,8 +20,8 @@ stages:
 build-code:
   extends: .build-code-template
   script:
-    - npm ci --prefix ./fix_tool_client/
-    - npm run build --prefix ./fix_tool_client/
+    - npm ci --prefix fixtool_client
+    - npm run build --prefix fixtool_client
     - dotnet build -c $BuildConfiguration
 
 unit-test:
