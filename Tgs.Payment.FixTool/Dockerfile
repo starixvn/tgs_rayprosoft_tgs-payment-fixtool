@@ -20,6 +20,7 @@ COPY ["FixTool.Core/FixTool.Core.csproj", "FixTool.Core/"]
 COPY ["FixTool.Repositories/FixTool.Repositories.csproj", "FixTool.Repositories/"]
 RUN dotnet restore "Tgs.Payment.FixTool/Tgs.Payment.FixTool.csproj"
 COPY . .
+COPY --from=nodejs /src/frontend/dist/frontend /src/Tgs.Payment.FixTool/wwwroot/
 WORKDIR "/src/Tgs.Payment.FixTool"
 RUN dotnet build "Tgs.Payment.FixTool.csproj" -c $BuildConfiguration -o /app/build
 
