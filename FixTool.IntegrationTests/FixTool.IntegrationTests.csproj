@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExpectedObjects" Version="3.5.4" />
     <PackageReference Include="Jering.Javascript.NodeJS" Version="6.3.1" />
     <PackageReference Include="JunitXml.TestLogger" Version="3.0.114" />
     <PackageReference Include="MartinCostello.Logging.XUnit" Version="0.3.0" />
@@ -40,6 +41,14 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Remove="D:\Users\Phoenix\source\repos\Tgs.Payment.FixTool\FixTool.IntegrationTests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="D:\Users\Phoenix\source\repos\Tgs.Payment.FixTool\FixTool.IntegrationTests\.editorconfig" />
   </ItemGroup>
 
 </Project>

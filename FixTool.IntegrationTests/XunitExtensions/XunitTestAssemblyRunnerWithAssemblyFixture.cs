@@ -28,12 +28,17 @@ public class XunitTestAssemblyRunnerWithAssemblyFixture : XunitTestAssemblyRunne
 		await base.AfterTestAssemblyStartingAsync();
 
 		// Go find all the AssemblyFixtureAttributes adorned on the test assembly
-		Aggregator.Run(() => StaticNodeJSService.Configure<NodeJSProcessOptions>(
-			nodeOptions => nodeOptions.ProjectPath =
-				Path.GetFullPath(Path.Combine(
-					Environment.CurrentDirectory,
-					"../../../..",
-					"fixtool_client"))));
+		Aggregator.Run(() =>
+		{
+			StaticNodeJSService.Configure<NodeJSProcessOptions>(
+				nodeOptions => nodeOptions.ProjectPath =
+					Path.GetFullPath(Path.Combine(
+						Environment.CurrentDirectory,
+						"../../../..",
+						"fixtool_client")));
+			StaticNodeJSService.Configure<OutOfProcessNodeJSServiceOptions>(
+				 processOptions => processOptions.Concurrency = Concurrency.MultiProcess);
+		});
 	}
 
 	protected override Task BeforeTestAssemblyFinishedAsync()
