@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging.Abstractions;
-using NSubstitute;
+﻿using NSubstitute;
 using Tgs.Payment.FixTools;
 using Tgs.Payment.FixTools.ApplicationServices;
 
