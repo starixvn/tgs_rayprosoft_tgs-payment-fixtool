@@ -1,1 +1,3 @@
-﻿[assembly: TestFramework("FixTool.IntegrationTests.XunitExtensions.XunitTestFrameworkWithAssemblyFixture", "FixTool.IntegrationTests")]
+﻿using PhoenixToolkits.Xunit.AssemblyFixture;
+
+[assembly: AssemblyFixtureTestFramework]
